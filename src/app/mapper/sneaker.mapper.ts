@@ -1,4 +1,4 @@
-import {Sneaker, SneakerProperty, SneakerType} from "../model/sneaker.model";
+import {Sneaker, SneakerStatus, SneakerType} from "../model/sneaker.model";
 import {SneakerDto} from "../client/sneaker.dto";
 
 export function sneakerMapperList(sneakerDtos: SneakerDto[]): Sneaker[] {
@@ -31,7 +31,7 @@ export function sneakerMapper(sneakerDto: SneakerDto): Sneaker {
     },
 
     price: sneakerDto.price / 1_000_000,
-    newListing: sneakerDto.newListing
+    status: sneakerDto.newListing ? SneakerStatus.NEW_LISTING : SneakerStatus.AVAILABLE
   }
 }
 

@@ -45,7 +45,7 @@ export class SneakerFinderFacade {
 
     return sneakerDto$.pipe(
       // @ts-ignore
-      map(v => v['type'] ? ({ ...v, orderId: snd.id, price: snd.sellPrice, newListing: !cachedSneaker }) : null),
+      map(v => v ? ({ ...v, orderId: snd.id, price: snd.sellPrice, newListing: !cachedSneaker }) : null),
       tap(v => v ? this.sneakerCache.set(snd.id, v) : null)
     );
   }

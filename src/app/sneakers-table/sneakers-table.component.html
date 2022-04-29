@@ -5,29 +5,34 @@
     <th>Type</th>
     <th>level</th>
     <th>Breed</th>
-    <th>Efficiency</th>
     <th>Luck</th>
     <th>Comfort</th>
+    <th>Efficiency</th>
     <th>Resilience</th>
     <th>Score</th>
     <th>Price</th>
     <th *ngIf="buyOption">Action</th>
+    <th *ngIf="noteColumn">Note</th>
   </tr>
   </thead>
   <tbody *ngIf="sneakers">
-  <tr *ngFor="let sneaker of sneakers">
-    <th>{{ sneaker.orderId }}</th>
-    <td>{{ typeToString(sneaker.type) }}</td>
-    <td>{{ sneaker.level }}</td>
-    <td>{{ sneaker.breed }}</td>
-    <ng-container [ngTemplateOutlet]="propertyCell" [ngTemplateOutletContext]="{type: PropertyType.EFFICIENCY, property: sneaker.efficiency }"></ng-container>
-    <ng-container [ngTemplateOutlet]="propertyCell" [ngTemplateOutletContext]="{type: PropertyType.LUCK, property: sneaker.luck }"></ng-container>
-    <ng-container [ngTemplateOutlet]="propertyCell" [ngTemplateOutletContext]="{type: PropertyType.COMFORT, property: sneaker.comfort }"></ng-container>
-    <ng-container [ngTemplateOutlet]="propertyCell" [ngTemplateOutletContext]="{type: PropertyType.RESILIENCE, property: sneaker.resilience }"></ng-container>
-    <ng-container [ngTemplateOutlet]="scoreCell" [ngTemplateOutletContext]="{score: globalScore(sneaker) }"></ng-container>
-    <td>{{ sneaker.price }}</td>
-    <td *ngIf="buyOption"><button class="btn btn-warning" (click)="buy(sneaker)">Buy</button></td>
-  </tr>
+  <ng-container *ngFor="let sneaker of sneakers">
+    <tr [ngClass]="{ 'bg-warning': sneaker.status === SneakerStatus.NEW_LISTING }">
+      <th>{{ sneaker.orderId }}</th>
+      <td>{{ typeToString(sneaker.type) }}</td>
+      <td>{{ sneaker.level }}</td>
+      <td>{{ sneaker.breed }}</td>
+      <ng-container [ngTemplateOutlet]="propertyCell" [ngTemplateOutletContext]="{type: PropertyType.LUCK, property: sneaker.luck }"></ng-container>
+      <ng-container [ngTemplateOutlet]="propertyCell" [ngTemplateOutletContext]="{type: PropertyType.COMFORT, property: sneaker.comfort }"></ng-container>
+      <ng-container [ngTemplateOutlet]="propertyCell" [ngTemplateOutletContext]="{type: PropertyType.EFFICIENCY, property: sneaker.efficiency }"></ng-container>
+      <ng-container [ngTemplateOutlet]="propertyCell" [ngTemplateOutletContext]="{type: PropertyType.RESILIENCE, property: sneaker.resilience }"></ng-container>
+      <ng-container [ngTemplateOutlet]="scoreCell" [ngTemplateOutletContext]="{score: globalScore(sneaker) }"></ng-container>
+      <td>{{ sneaker.price }}</td>
+      <td *ngIf="buyOption"><button class="btn btn-info" (click)="buy(sneaker)">Buy</button></td>
+      <td *ngIf="noteColumn">{{ sneaker.note }}</td>
+    </tr>
+  </ng-container>
+
   </tbody>
 </table>
 

@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {PropertyType, Sneaker, SneakerProperty, SneakerType} from "../model/sneaker.model";
+import {PropertyType, Sneaker, SneakerProperty, SneakerStatus, SneakerType} from "../model/sneaker.model";
 import {typeToStringMapper} from "../mapper/sneaker.mapper";
 import {SneakerBuyerFacade} from "../facade/sneaker-buyer.facade";
 import {globalScore, MAX_GLOBAL_SCORE} from "../model/buy-criteria.model";
@@ -12,6 +12,7 @@ import {scoreToRgb} from "../utils/colors.utils";
 export class SneakersTableComponent {
 
   PropertyType = PropertyType;
+  SneakerStatus = SneakerStatus;
   MAX_GLOBAL_SCORE = MAX_GLOBAL_SCORE;
 
   @Input()
@@ -19,6 +20,9 @@ export class SneakersTableComponent {
 
   @Input()
   buyOption: boolean = false;
+
+  @Input()
+  noteColumn: boolean = false;
 
   constructor(private sneakerBuyerFacade: SneakerBuyerFacade) {
   }

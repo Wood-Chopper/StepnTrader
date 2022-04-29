@@ -23,14 +23,41 @@
         "added": 0
       },
       "price": 13.3,
-      "newListing": true
+      "status": 0
     }
   ],
   "filters": {
     "type": null,
     "maxLevel": 30,
     "minLevel": 0,
-    "maxPrice": "13",
+    "maxPrice": "13.5",
     "minPrice": 0
-  }
+  },
+  "missed": [
+    {
+      "id": 80127915171,
+      "orderId": 20788120,
+      "type": 602,
+      "breed": 3,
+      "level": 5,
+      "efficiency": {
+        "base": 8.9,
+        "added": 0
+      },
+      "luck": {
+        "base": 8.7,
+        "added": 0
+      },
+      "comfort": {
+        "base": 8.8,
+        "added": 0
+      },
+      "resilience": {
+        "base": 6.7,
+        "added": 0
+      },
+      "price": 12.8,
+      "status": 1
+    }
+  ]
 }

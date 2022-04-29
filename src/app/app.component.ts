@@ -5,6 +5,8 @@ import {Sneaker, SneakerType} from "./model/sneaker.model";
 import {Filters} from "./model/filter.model";
 import {SneakerBuyerFacade} from "./facade/sneaker-buyer.facade";
 import {FilterSaveFacade} from "./facade/filter-save.facade";
+import {BalanceDetail} from "./model/balance.model";
+import {UserInfoFacade} from "./facade/user-info.facade";
 
 @Component({
   selector: 'app-root',
@@ -20,6 +22,10 @@ export class AppComponent {
 
   sneakersHistory$: Observable<Sneaker[]>;
 
+  missedHistory$: Observable<Sneaker[]>;
+
+  balance$: Observable<BalanceDetail>;
+
   floorPrice$: Subject<number> = new Subject<number>();
 
   filter: Filters = {
@@ -32,12 +38,13 @@ export class AppComponent {
 
   constructor(public sneakerFinderFacade: SneakerFinderFacade,
               private sneakerBuyerFacade: SneakerBuyerFacade,
-              private filterSaveFacade: FilterSaveFacade) {
+              private filterSaveFacade: FilterSaveFacade,
+              private userInfoFacade: UserInfoFacade) {
     this.sneakersHistory$ = sneakerBuyerFacade.sneakersHistory$;
-    this.sneakers$.subscribe(sneakers => {
-      sneakers.forEach(sn => this.sneakerBuyerFacade.analyseSneaker(sn))
-    });
+    this.missedHistory$ = sneakerBuyerFacade.missedHistory$;
+    this.sneakers$.subscribe(sneakers => sneakers.forEach(sn => this.sneakerBuyerFacade.analyseSneaker(sn)));
     this.filterSaveFacade.get().subscribe(filters => this.filter = filters);
+    this.balance$ = this.userInfoFacade.balance$;
   }
 
   public stop(): void {
@@ -46,7 +53,7 @@ export class AppComponent {
 
   public fetch(): void {
     document.cookie = "SESSIONIDD2=" + this.cookie.split('=').pop() + '; Path=/';
-
+    this.userInfoFacade.refreshBalance();
     this.stoped$ = new Subject();
 
     interval(2000).pipe(

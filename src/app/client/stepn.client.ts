@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {map, Observable} from "rxjs";
 import {SneakerDto, SneakerSummaryDto} from "./sneaker.dto";
-import {ResponseDto} from "./response.dto";
+import {AssetDto, ResponseDto} from "./response.dto";
 
 const STEPN_BASE_URL = '/stepn/run';
 
@@ -16,7 +16,8 @@ export class StepnClient {
     let params: any = {
       chain: 103,
       refresh: true,
-      order: order
+      order: order,
+      quality: 1
     };
     if (type) {
       params['type'] = type
@@ -31,13 +32,13 @@ export class StepnClient {
     );
   }
 
-  public sneakerDetails(orderId: number): Observable<SneakerDto | ResponseDto> {
+  public sneakerDetails(orderId: number): Observable<SneakerDto | null> {
     return this.httpClient.get<{data: SneakerDto}>(STEPN_BASE_URL + '/orderdata', {
       params: {
         orderId: orderId
       }
     }).pipe(
-      map(v => v.data)
+      map(v => v.data ? v.data : null)
     );
   }
 
@@ -48,5 +49,11 @@ export class StepnClient {
         price: price
       }
     })
+  }
+
+  public balance(): Observable<AssetDto[]> {
+    return this.httpClient.get<{data: { asset: AssetDto[] }}>(STEPN_BASE_URL + '/userbasic').pipe(
+      map(v => v.data.asset)
+    );
   }
 }

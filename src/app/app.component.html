@@ -40,22 +40,37 @@
   <hr/>
   <div class="row">
     <div class="col">Floor price: {{ floorPrice$ | async }}</div>
+    <ng-container *ngIf="(balance$ | async) as balance">
+      <div class="col">GST: {{ balance.gst }}</div>
+      <div class="col">GMT: {{ balance.gmt }}</div>
+      <div class="col">SOL: {{ balance.sol }}</div>
+    </ng-container>
   </div>
   <hr/>
   <div class="row">
-    <h3>Lasted listed Sneakers matching the criteria</h3>
+    <h3>Current Market</h3>
     <div class="col-12">
       <app-sneakers-table [sneakers]="sneakers$ | async" [buyOption]="true"></app-sneakers-table>
     </div>
 
   </div>
+
   <hr/>
+
   <div class="row">
     <h3>Buy history</h3>
     <div class="col-12">
       <app-sneakers-table [sneakers]="sneakersHistory$ | async"></app-sneakers-table>
     </div>
+  </div>
 
+  <hr/>
+
+  <div class="row">
+    <h3>Missed</h3>
+    <div class="col-12">
+      <app-sneakers-table [sneakers]="missedHistory$ | async" [noteColumn]="true"></app-sneakers-table>
+    </div>
   </div>
 
 </div>

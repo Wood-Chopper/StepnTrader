@@ -11,7 +11,9 @@ export interface Sneaker {
   resilience: SneakerProperty
 
   price: number,
-  newListing: boolean
+  status: SneakerStatus
+
+  note?: string
 }
 
 export enum SneakerType {
@@ -19,6 +21,12 @@ export enum SneakerType {
   JOGGER = 602,
   RUNNER = 603,
   TRAINER= 604
+}
+
+export enum SneakerStatus {
+  NEW_LISTING,
+  AVAILABLE,
+  NO_LONGER_AVAILABLE
 }
 
 export interface SneakerProperty {
