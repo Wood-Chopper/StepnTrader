@@ -1,0 +1,40 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th>#orderId</th>
+    <th>Type</th>
+    <th>level</th>
+    <th>Breed</th>
+    <th>Efficiency</th>
+    <th>Luck</th>
+    <th>Comfort</th>
+    <th>Resilience</th>
+    <th>Score</th>
+    <th>Price</th>
+    <th *ngIf="buyOption">Action</th>
+  </tr>
+  </thead>
+  <tbody *ngIf="sneakers">
+  <tr *ngFor="let sneaker of sneakers">
+    <th>{{ sneaker.orderId }}</th>
+    <td>{{ typeToString(sneaker.type) }}</td>
+    <td>{{ sneaker.level }}</td>
+    <td>{{ sneaker.breed }}</td>
+    <ng-container [ngTemplateOutlet]="propertyCell" [ngTemplateOutletContext]="{type: PropertyType.EFFICIENCY, property: sneaker.efficiency }"></ng-container>
+    <ng-container [ngTemplateOutlet]="propertyCell" [ngTemplateOutletContext]="{type: PropertyType.LUCK, property: sneaker.luck }"></ng-container>
+    <ng-container [ngTemplateOutlet]="propertyCell" [ngTemplateOutletContext]="{type: PropertyType.COMFORT, property: sneaker.comfort }"></ng-container>
+    <ng-container [ngTemplateOutlet]="propertyCell" [ngTemplateOutletContext]="{type: PropertyType.RESILIENCE, property: sneaker.resilience }"></ng-container>
+    <ng-container [ngTemplateOutlet]="scoreCell" [ngTemplateOutletContext]="{score: globalScore(sneaker) }"></ng-container>
+    <td>{{ sneaker.price }}</td>
+    <td *ngIf="buyOption"><button class="btn btn-warning" (click)="buy(sneaker)">Buy</button></td>
+  </tr>
+  </tbody>
+</table>
+
+<ng-template #scoreCell let-score="score">
+  <td [style]="{ 'background-color': defineScoreColor(score) }">{{ score }}/{{ MAX_GLOBAL_SCORE }}</td>
+</ng-template>
+<ng-template #propertyCell let-type="type" let-property="property">
+  <td *ngIf="type === PropertyType.COMFORT || type === PropertyType.LUCK" [style]="{ 'background-color': definePropertyColor(type, property) }">{{ property.base }} + {{ property.added }}</td>
+  <th *ngIf="type === PropertyType.RESILIENCE || type === PropertyType.EFFICIENCY" [style]="{ 'background-color': definePropertyColor(type, property) }">{{ property.base }} + {{ property.added }}</th>
+</ng-template>

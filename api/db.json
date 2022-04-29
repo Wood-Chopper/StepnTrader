@@ -1,0 +1,36 @@
+{
+  "history": [
+    {
+      "id": 145774532363,
+      "orderId": 20518377,
+      "type": 603,
+      "breed": 3,
+      "level": 5,
+      "efficiency": {
+        "base": 5.4,
+        "added": 20
+      },
+      "luck": {
+        "base": 7.1,
+        "added": 0
+      },
+      "comfort": {
+        "base": 2.6,
+        "added": 0
+      },
+      "resilience": {
+        "base": 10,
+        "added": 0
+      },
+      "price": 13.3,
+      "newListing": true
+    }
+  ],
+  "filters": {
+    "type": null,
+    "maxLevel": 30,
+    "minLevel": 0,
+    "maxPrice": "13",
+    "minPrice": 0
+  }
+}
