@@ -21,14 +21,14 @@ export class UserInfoFacade {
   public refreshBalance(): void {
     this.stepnClient.balance().pipe(
       map(balanceDto => ({
-        gst: this.getBalanceForCode(balanceDto, 3000),
-        gmt: this.getBalanceForCode(balanceDto, 3001),
-        sol: this.getBalanceForCode(balanceDto, 1003)
+        gst: this.getBalanceForCode(balanceDto, 3000, 100),
+        gmt: this.getBalanceForCode(balanceDto, 3001, 100),
+        sol: this.getBalanceForCode(balanceDto, 1003, 1_000_000)
       }))
     ).subscribe(b => this.balance$.next(b));
   }
 
-  private getBalanceForCode(balanceDto: AssetDto[], tokenCode: number) {
-    return balanceDto.filter(b => b.token === tokenCode).map(v => v.value / 1_000_000)[0];
+  private getBalanceForCode(balanceDto: AssetDto[], tokenCode: number, factor: number) {
+    return balanceDto.filter(b => b.token === tokenCode).map(v => v.value / factor)[0];
   }
 }

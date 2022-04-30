@@ -26,7 +26,7 @@ export enum SneakerType {
 export enum SneakerStatus {
   NEW_LISTING,
   AVAILABLE,
-  NO_LONGER_AVAILABLE
+  MISSED
 }
 
 export interface SneakerProperty {

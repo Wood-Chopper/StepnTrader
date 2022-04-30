@@ -1,5 +1,5 @@
 <div class="container">
-  <h1>Welcome to Step'n Ultra Trader</h1>
+  <h1>Step'n Ultra Trader 3000</h1>
 
   <div class="row">
     <div class="col">
@@ -17,29 +17,39 @@
 
   <div class="row">
     <div class="col">
-      <label>
-        Minimum price
-        <input [(ngModel)]="filter.minPrice" />
-      </label>
-      <label>
-        Maximum price
-        <input [(ngModel)]="filter.maxPrice" />
-      </label>
+      <div>
+        <input class="mr-2" type="radio" value="0" name="maxPriceType" [(ngModel)]="filter.maxPriceType"/>
+        <label>
+          Maximum price
+          <input type="number" [(ngModel)]="filter.maxPrice" />
+        </label>
+      </div>
+      <div>
+        <input class="mr-2" type="radio" value="1" name="maxPriceType" [(ngModel)]="filter.maxPriceType"/>
+        <label>
+          Max SOL above floor Price
+          <input type="number" [(ngModel)]="filter.maxSolAbove" />
+          = {{ marketStat.floorPrice + (+filter.maxSolAbove) }}
+        </label>
+      </div>
     </div>
     <div class="col">
       <label>
         Minimum level
-        <input [(ngModel)]="filter.minLevel" />
+        <input type="number" [(ngModel)]="filter.minLevel" />
       </label>
       <label>
         Maximum level
-        <input [(ngModel)]="filter.maxLevel" />
+        <input type="number" [(ngModel)]="filter.maxLevel" />
       </label>
     </div>
   </div>
   <hr/>
   <div class="row">
-    <div class="col">Floor price: {{ floorPrice$ | async }}</div>
+    <ng-container *ngIf="marketStat">
+      <div class="col">Floor price: {{ marketStat.floorPrice }}</div>
+      <div class="col">Avg 30 floor price: {{ marketStat.avg }}</div>
+    </ng-container>
     <ng-container *ngIf="(balance$ | async) as balance">
       <div class="col">GST: {{ balance.gst }}</div>
       <div class="col">GMT: {{ balance.gmt }}</div>

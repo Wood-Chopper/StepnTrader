@@ -5,12 +5,7 @@ import {HistoryClient} from "../client/history.client";
 import {BehaviorSubject} from "rxjs";
 import {entityPriceToDtoPrice} from "../mapper/filter.mapper";
 import {ResponseCode} from "../client/response.dto";
-import {
-  minimumEfficiency,
-  noPointWasted,
-  primaryStatCriteria,
-  secondaryStatCriteria
-} from "../model/buy-criteria.model";
+import {minimumEfficiency, noPointWasted, primaryStatCriteria} from "../model/buy-criteria.model";
 import {UserInfoFacade} from "./user-info.facade";
 
 @Injectable({
@@ -39,7 +34,6 @@ export class SneakerBuyerFacade {
 
   private respectBuyCriterias(sneaker: Sneaker): boolean {
     return primaryStatCriteria(sneaker)
-      && secondaryStatCriteria(sneaker)
       && minimumEfficiency(sneaker)
       && noPointWasted(sneaker);
   }
@@ -61,7 +55,7 @@ export class SneakerBuyerFacade {
   }
 
   private saveMissed(sneaker: Sneaker, reason: string): void {
-    const sneakerWithNote: Sneaker = { ...sneaker, note: reason };
+    const sneakerWithNote: Sneaker = { ...sneaker, note: reason, status: SneakerStatus.MISSED };
     this.historyClient.saveMissedOpportunity(sneakerWithNote).subscribe();
     this.missedHistory$.next([ ...this.missedHistory$.getValue(), sneakerWithNote])
   }

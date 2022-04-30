@@ -1,12 +1,13 @@
 import {Component} from '@angular/core';
 import {interval, Observable, startWith, Subject, switchMap, takeUntil, tap} from "rxjs";
 import {SneakerFinderFacade} from "./facade/sneaker-finder.facade";
-import {Sneaker, SneakerType} from "./model/sneaker.model";
-import {Filters} from "./model/filter.model";
+import {Sneaker} from "./model/sneaker.model";
+import {Filters, MaxPriceType} from "./model/filter.model";
 import {SneakerBuyerFacade} from "./facade/sneaker-buyer.facade";
 import {FilterSaveFacade} from "./facade/filter-save.facade";
 import {BalanceDetail} from "./model/balance.model";
 import {UserInfoFacade} from "./facade/user-info.facade";
+import {MarketStat} from "./model/market.model";
 
 @Component({
   selector: 'app-root',
@@ -26,14 +27,18 @@ export class AppComponent {
 
   balance$: Observable<BalanceDetail>;
 
-  floorPrice$: Subject<number> = new Subject<number>();
+  marketStat: MarketStat = {
+    floorPrice: 0,
+    avg: 0
+  };
 
   filter: Filters = {
     type: null,
     maxLevel: 30,
     minLevel: 0,
     maxPrice: 13.5,
-    minPrice: 0
+    maxSolAbove: 1.5,
+    maxPriceType: MaxPriceType.FIXED
   }
 
   constructor(public sneakerFinderFacade: SneakerFinderFacade,
@@ -56,17 +61,18 @@ export class AppComponent {
     this.userInfoFacade.refreshBalance();
     this.stoped$ = new Subject();
 
-    interval(2000).pipe(
+    interval(2700).pipe(
       tap(() => this.filterSaveFacade.save(this.filter)),
       takeUntil(this.stoped$),
-      switchMap(() => this.sneakerFinderFacade.findSneakers(this.filter))
+      switchMap(() => this.sneakerFinderFacade.findSneakers(this.filter, this.marketStat.floorPrice))
     ).subscribe(v => this.sneakers$.next(v));
 
     interval(10000).pipe(
       takeUntil(this.stoped$),
       startWith(0),
-      switchMap(() => this.sneakerFinderFacade.floorPrice())
-    ).subscribe(v => this.floorPrice$.next(v));
+      switchMap(() => this.sneakerFinderFacade.marketStat())
+    ).subscribe(v => this.marketStat = v)
+
   }
 
 }

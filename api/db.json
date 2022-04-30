@@ -30,8 +30,9 @@
     "type": null,
     "maxLevel": 30,
     "minLevel": 0,
-    "maxPrice": "13.5",
-    "minPrice": 0
+    "maxPrice": "13",
+    "maxPriceType": "1",
+    "maxSolAbove": 1
   },
   "missed": [
     {
@@ -57,7 +58,138 @@
         "added": 0
       },
       "price": 12.8,
-      "status": 1
+      "status": 2,
+      "note": "Please transfer SOL to Vault"
+    },
+    {
+      "id": 170581187175,
+      "orderId": 21171362,
+      "type": 603,
+      "breed": 2,
+      "level": 5,
+      "efficiency": {
+        "base": 7.3,
+        "added": 0
+      },
+      "luck": {
+        "base": 9.8,
+        "added": 0
+      },
+      "comfort": {
+        "base": 6.4,
+        "added": 0
+      },
+      "resilience": {
+        "base": 9.6,
+        "added": 0
+      },
+      "price": 13,
+      "status": 2,
+      "note": "Please transfer SOL to Vault"
+    },
+    {
+      "id": 179313303925,
+      "orderId": 21250068,
+      "type": 603,
+      "breed": 3,
+      "level": 5,
+      "efficiency": {
+        "base": 8.1,
+        "added": 0
+      },
+      "luck": {
+        "base": 7.1,
+        "added": 0
+      },
+      "comfort": {
+        "base": 4.3,
+        "added": 0
+      },
+      "resilience": {
+        "base": 8.3,
+        "added": 0
+      },
+      "price": 13,
+      "status": 2,
+      "note": "Please transfer SOL to Vault"
+    },
+    {
+      "id": 175968232971,
+      "orderId": 21295686,
+      "type": 602,
+      "breed": 3,
+      "level": 5,
+      "efficiency": {
+        "base": 9.4,
+        "added": 0
+      },
+      "luck": {
+        "base": 3.1,
+        "added": 0
+      },
+      "comfort": {
+        "base": 4.1,
+        "added": 0
+      },
+      "resilience": {
+        "base": 5.7,
+        "added": 0
+      },
+      "price": 12.9,
+      "status": 2,
+      "note": "Please transfer SOL to Vault"
+    },
+    {
+      "id": 181773987739,
+      "orderId": 21306551,
+      "type": 603,
+      "breed": 2,
+      "level": 5,
+      "efficiency": {
+        "base": 9,
+        "added": 0
+      },
+      "luck": {
+        "base": 1.5,
+        "added": 0
+      },
+      "comfort": {
+        "base": 8.3,
+        "added": 0
+      },
+      "resilience": {
+        "base": 9.1,
+        "added": 0
+      },
+      "price": 12.5,
+      "status": 2,
+      "note": "The order does not exist"
+    },
+    {
+      "id": 173106287027,
+      "orderId": 21385080,
+      "type": 603,
+      "breed": 2,
+      "level": 5,
+      "efficiency": {
+        "base": 9.8,
+        "added": 16
+      },
+      "luck": {
+        "base": 4.5,
+        "added": 0
+      },
+      "comfort": {
+        "base": 7.7,
+        "added": 0
+      },
+      "resilience": {
+        "base": 6.4,
+        "added": 4
+      },
+      "price": 12.5,
+      "status": 2,
+      "note": "Please transfer SOL to Vault"
     }
   ]
 }
