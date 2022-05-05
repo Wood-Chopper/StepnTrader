@@ -9,7 +9,7 @@ export function primaryStatCriteria(sneaker: Sneaker): boolean {
 }
 
 export function secondaryStatCriteria(sneaker: Sneaker): boolean {
-  return sneaker.comfort.base + sneaker.luck.base >= 6;
+  return sneaker.comfort.base + sneaker.luck.base >= 10;
 }
 
 export function maxMint2(sneaker: Sneaker): boolean {

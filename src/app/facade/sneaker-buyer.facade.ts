@@ -5,7 +5,13 @@ import {HistoryClient} from "../client/history.client";
 import {BehaviorSubject} from "rxjs";
 import {entityPriceToDtoPrice} from "../mapper/filter.mapper";
 import {ResponseCode} from "../client/response.dto";
-import {minimumEfficiency, noPointWasted, primaryStatCriteria} from "../model/buy-criteria.model";
+import {
+  minimumEfficiency,
+  noPointWasted,
+  notRunner,
+  primaryStatCriteria,
+  secondaryStatCriteria
+} from "../model/buy-criteria.model";
 import {UserInfoFacade} from "./user-info.facade";
 
 @Injectable({
@@ -35,6 +41,8 @@ export class SneakerBuyerFacade {
   private respectBuyCriterias(sneaker: Sneaker): boolean {
     return primaryStatCriteria(sneaker)
       && minimumEfficiency(sneaker)
+      && notRunner(sneaker)
+      && secondaryStatCriteria(sneaker)
       && noPointWasted(sneaker);
   }
 
@@ -43,10 +51,15 @@ export class SneakerBuyerFacade {
       if (response.code === +ResponseCode.SUCCESS) {
         this.saveBought(sneaker);
         this.userInfoFacade.refreshBalance();
+        this.sellSneaker(sneaker);
       } else {
         this.saveMissed(sneaker, response.msg);
       }
     })
+  }
+
+  private sellSneaker(sneaker: Sneaker): void {
+    this.stepnClient.sell(sneaker.id, Math.floor(sneaker.price * 1.08)).subscribe();
   }
 
   private saveBought(sneaker: Sneaker): void {

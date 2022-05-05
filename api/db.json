@@ -24,6 +24,31 @@
       },
       "price": 13.3,
       "status": 0
+    },
+    {
+      "id": 27515597085,
+      "orderId": 23505045,
+      "type": 603,
+      "breed": 3,
+      "level": 5,
+      "efficiency": {
+        "base": 9,
+        "added": 0
+      },
+      "luck": {
+        "base": 1.9,
+        "added": 0
+      },
+      "comfort": {
+        "base": 8.1,
+        "added": 0
+      },
+      "resilience": {
+        "base": 7.6,
+        "added": 0
+      },
+      "price": 14.15,
+      "status": 0
     }
   ],
   "filters": {
@@ -32,7 +57,7 @@
     "minLevel": 0,
     "maxPrice": "13",
     "maxPriceType": "1",
-    "maxSolAbove": 1
+    "maxSolAbove": 0.5
   },
   "missed": [
     {
@@ -190,6 +215,32 @@
       "price": 12.5,
       "status": 2,
       "note": "Please transfer SOL to Vault"
+    },
+    {
+      "id": 146639632117,
+      "orderId": 23507762,
+      "type": 603,
+      "breed": 2,
+      "level": 5,
+      "efficiency": {
+        "base": 9.5,
+        "added": 0
+      },
+      "luck": {
+        "base": 5.2,
+        "added": 0
+      },
+      "comfort": {
+        "base": 6.3,
+        "added": 0
+      },
+      "resilience": {
+        "base": 9.1,
+        "added": 0
+      },
+      "price": 13.489,
+      "status": 2,
+      "note": "The order does not exist"
     }
   ]
 }

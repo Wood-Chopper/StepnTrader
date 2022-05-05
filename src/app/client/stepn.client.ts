@@ -51,6 +51,15 @@ export class StepnClient {
     })
   }
 
+  public sell(propId: number, price: number): Observable<ResponseDto> {
+    return this.httpClient.get<ResponseDto>(STEPN_BASE_URL + '/addprop', {
+      params: {
+        propID: propId,
+        price: price
+      }
+    })
+  }
+
   public balance(): Observable<AssetDto[]> {
     return this.httpClient.get<{data: { asset: AssetDto[] }}>(STEPN_BASE_URL + '/userbasic').pipe(
       map(v => v.data.asset)
