@@ -6,7 +6,7 @@ This project is an Angular 13 project.
 
 ## Architecture
 
-The project uses the clean architecture as close as it could be used in Angular.
+The project uses the onion architecture as close as it could be used in Angular.
 
 ## Screenshot
 ![image](https://user-images.githubusercontent.com/9164497/173182395-6d538522-9554-4d34-a44f-356dea9c0aef.png)
